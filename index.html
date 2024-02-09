@@ -146,12 +146,12 @@
 \]
 
 <p>
-The above expression may look alien but rest assured, it is merely a familiar face couched in the trappings of foreign notation (it's Equation \eqref{eq:RTE0}). First we see that there are only four terms, one on the left hand side (LHS) and three on the right hand side (RHS). </p>
+The above expression may look alien but rest assured, it is merely a familiar face couched in the trappings of foreign notation <span class="peasant">(it's Equation \eqref{eq:RTE0} in disguise)</span>. First we see that there are only four terms, one on the left hand side (LHS) and three on the right hand side (RHS). </p>
 
-<p>LHS: \(\hat \omega\) is the direction of propagation, \(\mathbf x\) is the four momentum of the incident photons and it therefore encodes frequency as well as direction, \(n(\mathbf x)\) is the photon number density. Since \(I_x \propto n_x x\), we see that the left hand side is related to \({d I_\nu \over d s}\) by a factor of the frequency \(x \equiv \nu\)—the author chose to put it’s reciprocal on the left-hand side instead. </p>
+<p><b>LHS:</b> \(\hat \omega\) is the direction of propagation, \(\mathbf x\) is the four momentum of the incident photons and it therefore encodes frequency as well as direction, \(n(\mathbf x)\) is the photon number density. Since \(I_x \propto n_x x\), we see that the left hand side is related to \({d I_\nu \over d s}\) by a factor of the frequency \(x \equiv \nu\)—the author chose to put it’s reciprocal on the left-hand side instead. </p>
 
 <p>
-RHS: \(\mathbf x_1\) is the four-momentum of the scattered photon, \(\mu\) is the cosine of the scattering angle, and \(R(x,x_1,\mu)\) is the redistribution function which quantifies the rate at which a photon with energy $x$ will scatter into a photon with energy $x_1$, at scattering angle \(\mu\). As intimidating as they look, there are only three terms, and, two of them are familiar. The first is negative, and it’s proportional to \(n(\mathbf x)\), just like \(-\sigma_\nu I_\nu\). The second is positive, and looks alot like the in-scattering term \(\int \sigma_\nu (\Omega’ \to \Omega )d\Omega’\). The final term is a bit awkward and it may have to do with photon-photon interactions (don't ask me); suffice it to say, that if \(n(\mathbf x)<<1\), the term is negligible and when we are in regimes where the redistribution is roughly symmetric in it’s first two arguments \(R(x,x_1,\mu)\approx R(x_1,x,\mu)\), it is also negligible. </p>
+<b>RHS:</b> \(\mathbf x_1\) is the four-momentum of the scattered photon, \(\mu\) is the cosine of the scattering angle, and \(R(x,x_1,\mu)\) is the redistribution function which quantifies the rate at which a photon with energy $x$ will scatter into a photon with energy $x_1$, at scattering angle \(\mu\). As intimidating as they look, there are only three terms, and, two of them are familiar. The first is negative, and it’s proportional to \(n(\mathbf x)\), just like \(-\sigma_\nu I_\nu\). The second is positive, and looks alot like the in-scattering term \(\int \sigma_\nu (\Omega’ \to \Omega )d\Omega’\). The final term is a bit awkward and it may have to do with photon-photon interactions (don't ask me); suffice it to say, that if \(n(\mathbf x)<<1\), the term is negligible and when we are in regimes where the redistribution is roughly symmetric in it’s first two arguments \(R(x,x_1,\mu)\approx R(x_1,x,\mu)\), it is also negligible. </p>
 
 <p>
 Now all we have to do is figure out what the redistribution function is and then we know the full RTE <span class="peasant">(in other words EVERYTHING)<span class="peasant">. 
@@ -175,15 +175,15 @@ Now all we have to do is figure out what the redistribution function is and then
 
 <h2>Results</h2>
 
-<p>Here's the punchline: Equation \eqref{eq:punchline}</p>
+<p>Here's the punchline: 
 
 \[
 \begin{equation}\label{eq:punchline}
-\kappa_R \propto {\int_0^\infty {\partial B_x \over \partial \Theta} dx \over \int_0^\infty l_x {\partial B_x \over \partial \Theta} dx}
+\kappa_R \propto {\int_0^\infty {\partial B_x \over \partial \Theta} dx \over \int_0^\infty l_x {\partial B_x \over \partial \Theta} dx} .
 \end{equation}
 \]
 
-<p>We're done! A similar expression can be found for the Flux mean opacity. Sure, we’ve made a few approximations, but all of them hold water in the regimes of interest to Juri Poutanen. Notably, electron degeneracy and relativistic effects have been accounted for. </p>
+<p>We're done! That's the Rosseland Mean opacity written in terms of the mean-free-path! A similar expression can be found for the Flux mean opacity. Sure, we’ve made a few approximations, but all of them hold water in the regimes of interest to Juri Poutanen. Notably, electron degeneracy and relativistic effects have been accounted for. </p>
 
 <p>We are now poised to reap the rewards of Juri Poutanen's labour by using this result to review the litterature. Luckily, Poutanen did that for us too! </p>
 
@@ -201,12 +201,12 @@ Now all we have to do is figure out what the redistribution function is and then
 
 <p><b>What struck me</b> about this paper was the analytical sophistication of Poutanen’s result. It appears to be the final word on the computation of both the Rosseland mean opacity and the flux mean opacity in these high-energy regimes. I'm impressed by Poutanen's ability to make his findings legible to a wide audience and to package them into a coherent 8-page bombshell of a paper. </p>
 
-<p>The qualification I put in the title is obviously a bit of a joke at the expense of Poutanen, but it's not very cutting because the result is much more general and generalizable than the joke would have you believe. Half of those qualifiers are sound assumptions in many astrophysical contexts (LTE, Optically Thick, Hot), and the result also holds in the non-degenerate case. Furthermore, something I glossed over in this review was that absorbption <i>was</i> accounted for! Finally, the assumption that the scattering agents are isotropically distributed is good because (a) it simplifies the reader's job, and (b) this paper lays the ground-work for computing non-isotropic distributions too: just figure out how to incorporate that into the redistribution function and you're done! </p>
+<p>The qualification I put in the title is obviously a bit of a joke at the expense of Poutanen, but it's not very cutting because the result is much more general and generalizable than the joke would have you believe. Half of those qualifiers are sound assumptions in many astrophysical contexts (LTE, Optically Thick, Hot), and the result also holds in the non-degenerate case. I didn't mention this in the review but that absorbption <i>was accounted for!</i>, which makes the result that much more impressive. Finally, the assumption that the scattering agents are isotropically distributed is good because (a) it simplifies the reader's job, and (b) this paper lays the ground-work for computing non-isotropic distributions too: just figure out how to incorporate that into the redistribution function and you're done! </p>
 
 <p>
-<b>This paper was published</b> in Feburary 2017 and has accrued 40 citations as of Feburary 2024. I sampled 15 of those citations and they were split about 50/50 between papers on stellar evolution and papers on neutron stars. Nevertheless, it's hard to evaluate the importance of this paper without being familiar with the field. (I didn't trouble myself to read those papers to find out how critical Poutanen's work was to them.)</p>
+<b>This paper was published</b> in Feburary 2017 and has accrued 40 citations as of Feburary 2024. I sampled 15 of those citations and they were split about 50/50 between papers on stellar evolution and papers on neutron stars. Despite modern search tools, it's hard to evaluate the importance of this paper without being familiar with the field. <span class="peasant">(I didn't trouble myself to read those papers to find out how critical Poutanen's work was to them.)</span></p>
 
-<p>It definitely seems like a useful piece of work; Poutanen found errors in one of the approximations used in the litterature and he was able to show us explicitly in what temperature and degeneracy regimes other approximations become invalid. I doubt it voids any past work but it does empower us to discern the accuracy of past results that made use of dubious approximations. Moreover, it paves the way for more precise simulations of X-ray bursts and solar interiors and it gives us more confidance in future simulation results. Perhaps a future paper will do the same derivation but with an anisotropic electron distribution to model strong magnetic fields. </p>
+<p>It definitely seems like a useful piece of work: Poutanen found errors in one of the approximations used in the litterature. Furthermore, he was able to show us explicitly in what temperature and degeneracy regimes other approximations become invalid. I doubt it voids any past work but it does empower us to discern the accuracy of past results that made use of dubious approximations. Moreover, it paves the way for more precise simulations of X-ray bursts and solar interiors and it gives us more confidance in future simulation results. Perhaps a future paper will do the same derivation but with an anisotropic electron distribution to model strong magnetic fields. </p>
 
 <p>Unfortunately I couldn't find Juri Poutanen on GitHub and was unable to scrutinize his code; though I have messaged him about this. I also felt that there was a computational optimization section missing from this paper; we were never shown how fast the $l_x$ iterations converged. </p>
 

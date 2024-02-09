@@ -84,9 +84,9 @@
 
 <h2>Introduction </h2>
 
-<p>Radiative transport is one of the two pillars of astrophysical heat transport that underpin our knowledge of <i>many</i> (all?) astrophysical processes. The Rosseland and Flux mean opacities provide a way to compress a whole spectrum's worth of energy-transfer information into a single number, as such they are essential and ubiquitous tools in the arsenal of astrophysicists. </p>
+<p>Radiative transport is one of two pillars of astrophysical heat transport that underpin our knowledge of <i>many</i> (all?) astrophysical processes. The Rosseland and Flux mean opacities provide a way to compress a whole spectrum's worth of energy-transfer information into a single number, as such they are essential and ubiquitous tools in the arsenal of astrophysicists. </p>
 
-<p>Juri Poutanen's paper is about deriving an exact expression for the Rosseland and Flux mean opacities, so we have no choice but to get down and dirty with some equations. However, we will not be as assiduous in our book-keeping as Poutanen is in the paper, opting instead to select a few key equations and pick them appart for physical intuition. (If you want to see the derivations in all their glory you can read the paper. If that doesn't quench your appetite there's an 83 page monograph on the minutae of Compton Scattering penned by the same hand.) </p>
+<p>In his paper, Juri Poutanen derives an exact expression for the Rosseland and Flux mean opacities from basic physics; this being the case, we have no choice but to get down and dirty with some equations. However, we will not be as assiduous in our book-keeping as Poutanen is in the paper, opting instead to select a few key equations and pick them appart for physical intuition. (If you want to see the derivations in all their glory you can read the paper. If that doesn't quench your appetite there's an 83 page monograph on the minutae of Compton Scattering penned by the same hand.) </p>
 
 <h3>Rosseland Mean Opacity</h3>
 
@@ -129,7 +129,9 @@
 \end{equation}
 \]
 
-<p>Compton scattering is a photon-electron inelastic collision. It's "inelastic" because energy is echanged between photons and the electrons, this only happens when the electrons are hot. Compton scattering is an innately quantum phenomenon, so classical EM waves won’t help us here. A photon—a quanta of the EM field—has some probability of scattering off of an electron. We like to think about photons as being located in some particular place rather than in a superposition of many places at once, and, thankfully, this “billiard ball” imagery is applicable here if we are willing to take a few QED-derived (Quantum Electro Dynamics) formulae on good faith. </p>
+<p>Compton scattering is a photon-electron inelastic collision. It's "inelastic" because energy is echanged between photons and the electrons, this only happens when the electrons are hot. Compton scattering is an innately quantum phenomenon, so classical EM waves won’t help us here.</p> 
+
+<p class="block"><b>Compton Scattering Analogy:</b> A photon—a quanta of the EM field—has some probability of scattering off of an electron. We like to think about photons as being located in some particular place rather than in a superposition of many places at once, and, thankfully, this “billiard ball” imagery is applicable if we are willing to take a few QED-derived (Quantum Electro Dynamics) formulae on good faith. </p>
 
 
 <p>Starting from the relativistic kinetic equation for Compton scattering, which accounts for induced scattering and fermion degeneracy, Poutanen guids us to the RTE. We will gloss over the derivation but pick apart the resulting RTE as it is the wellspring from which all knowledge flows. </p>
@@ -165,7 +167,7 @@ Now all we have to do is figure out what the redistribution function is and then
 
 <p>Another ingredient that enters the dynamics of these interactions is the Klein-Nishina reaction rate, which is related to the Klein-Nishina cross section. The reaction rate (and the cross section) is dependent on the four-momenta of the incoming and scattered photon. This aditional element of complication is required to deal with relativistic electrons. (And the electrons that inhabit the nuclear furnaces of X-ray-bursting neutron stars are very much relativistic.) </p>
 
-<p class="block">Analogy. Imagine the electrons are billiard balls and photons are like ping-pong balls, and they're all bouncing around the place. The cross-section of a particle is kindof like the $\pi r^2$, where $r$ is the ball's radius. The greater the cross section, the likelier two passing balls will hit each other. Unfortunately, the Klein-Nishina cross section is dependent on speed and direction of incident. This means that the billiard balls' sizes appear larger to ping-pong balls (photons) that it is speeding towards that ping pong balls that it's travelling perpendicularly to. This is quite unintuitive to picture. That's special relativity.</p>
+<p class="block"><b>Cross Section Analogy:</b> Imagine the electrons are billiard balls and photons are like ping-pong balls, and they're all bouncing around the place. The cross-section of a particle is kindof like the $\pi r^2$, where $r$ is the ball's radius. The greater the cross section, the likelier two passing balls will hit each other. Unfortunately, the Klein-Nishina cross section is dependent on speed and direction of incident. This means that the billiard balls' sizes appear larger to ping-pong balls (photons) that it is speeding towards that ping pong balls that it's travelling perpendicularly to. This is quite unintuitive to picture. That's special relativity.</p>
 
 <p>To get at a manageable expression for the distribution of photons, we expand around the black-body distribution to first order. This is justified because in the thermonuclear burning regions we are concerned with, the radiation field is nearly isotropic. The non-black-body term depends on the (frequency dependent) mean-free path $l_x$.</p>
 

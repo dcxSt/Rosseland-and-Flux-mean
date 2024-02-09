@@ -7,6 +7,23 @@
   <title>Rosseland-Flux</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      tags: 'ams', // This enables AMS-style numbering
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      ignoreHtmlClass: 'tex2jax_ignore',
+      processHtmlClass: 'tex2jax_process'
+    }
+  };
+  </script>
+
+  <link rel="stylesheet" href="index.css">
+  <!--<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,110 +46,175 @@
     #p5-sketch {
       position: relative;
     }
+    figcaption {
+        text-align: center;
+        /* font-size: 13px; */
+        font-family: Permanent Marker;
+        color: rgb(57, 57, 57);
+        padding: 5px;
+      }
   </style>
 </head>
 
 <body>
   <div class="content">
-  <h1>The Final Word on Computing the Rosseland-Mean and Flux-Mean Opacities</h1>
-  Equation example
+    <br/><br/>
+  <h1>The Final Word on Computing Rosseland and Flux Mean Opacities*</h1>
+  <h5>*in Hot, Isotropic, Degenerate, Optically Thick, Locally Thermalized, Scattering Dominated Media</h5>
 
-  \[\phi(\mu';\mu)d\mu' = \frac{3}{8}\left(1 + \mu^2\mu'^2 + \frac{1}{2}\left(1 - \mu^2\right)\left(1 - \mu'^2\right)\right)d\mu'\]
 
-  <i>Sketch example</i><br/><br/>
+  <p><b>Paper:</b> <a href="https://iopscience.iop.org/article/10.3847/1538-4357/835/2/119">https://iopscience.iop.org/article/10.3847/1538-4357/835/2/119</a></p>
 
-  <div class="centered-content">
-    <div id="p5-sketch">
-      <!-- Link to the p5.js library -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-      <!-- p5.js Script -->
-      <script src="./phi_sketch.js"></script>
-    </div> <!-- Container for p5.js sketch -->
-  </div>
   <br/>
+      <div>
+        <img
+          src="./assets/radiative_heat_transfer.webp";
+          width="49%"
+        />
+
+        <img
+          src="./assets/xray_burst.webp";
+          width="49%"
+        />
+        <figcaption>Artistic renditions of radiative transport inside of hot, degenerate, optically thick, scattering dominated poster child media: cores of stars (left) and X-ray bursts (right).</figcaption>
+      </div>
 
 
-Author: Juri Poutanen. https://iopscience.iop.org/article/10.3847/1538-4357/835/2/119 
+<h2>Introduction </h2>
 
-Introduction: (What’s the paper about and what’s the big picture?)
+<p><a href="https://users.utu.fi/jurpou/">Juri Poutanen</a>, author of the paper we are reviewing, is a high-energy astrophysicist in Finland. He studies stellar interiors and X-ray bursts.</p>
 
-Our understanding of radiative pressure and radiative heat transport are a requisite to our understanding of many astrophysical processes of interest. The Rosseland mean and Flux-mean opacities. 
+<p>Our understanding of radiative pressure and radiative heat transport underpins our understanding of <i>many</i> (all?) astrophysical processes. The Rosseland and Flux mean opacities are essential and ubiquitous tools in the arsenal of astrophysicists because they provide a way to compress a whole spectrum's worth of energy-transfer information into a single number.</p>
 
-Why do we Care About the Rosseland Mean and Flux Mean Opacities?
+<p>Juri Poutanen's paper is about deriving an exact expression for the Rosseland and Flux mean opacities, so we have no choice but to get down and dirty with the equations. However, we will not be as assiduous in our book-keeping as Poutanen is in the paper, opting instead to select a few key equations and pick them appart for physical intuition. (If you want to see the derivations in all their glory you can read the paper. If that doesn't quench your appetite there's an 83 page monograph on the minutae of Compton Scattering penned by the same hand.) </p>
 
-Radiation transfer is what astrophysicists call “how light propagates in different media”. Media are “backgrounds” through which light travels: e.g. a gas of ionized hydrogen at 3000 Kelvin is one example of a medium astrophysicists may be interested in—or, less abstractly, the inside of the sun is another. 
+<h3>Rosseland Mean Opacity</h3>
 
-One of the important parameters in determining the dynamics of radiation transfer through a medium is its opacity. The opacity quantifies the rate of scattering (photons bouncing off of things) and absorption (photons being gobbled up by things). The opacity of any medium is frequency dependent, which is to say it absorbs and scatters different frequencies of light differently. 
+\[
+\begin{equation}\label{eq:RMO}
+{1 \over \kappa_R} = {\int_0^\infty d\nu \kappa_\nu^{-1}(\partial B_\nu / \partial T) \over \int_0^\infty d\nu (\partial B_\nu / \partial T)}
+\end{equation}
+\]
 
-The Rosseland mean opacity (RMO) is a weighted frequency-average of the opacity of a medium, with more weight being ascribed to those frequencies which are more abundant; it is an average opacity, weighted according to the contribution of different wavelengths of radiation to the total energy transport. The RMO is important because it allows for a simplified treatment of radiative transfer within stars and other optically thick astrophysical furnaces, such as X-ray bursts.
+<p>Radiation transfer is what astrophysicists call “how light propagates in different media”. Media are “backgrounds” through which light travels: e.g. a gas of ionized hydrogen at 3000 Kelvin, is one example of a medium astrophysicists may be interested in—or, less abstractly, the inside of the sun is another. </p>
 
-$${1 \over \kappa_R} = {\int_0^\infty d\nu {1 \over \kappa_\nu}(\partial B_\nu / \partial T) \over \int_0^\infty d\nu (\partial B_\nu / \partial T)}$$
+<p>One of the important parameters in determining the dynamics of radiation transfer through a medium is its opacity. The opacity quantifies the rate of scattering (photons bouncing off of things) and absorption (photons being gobbled up by things). The opacity of a medium is frequency dependent, i.e. media typically absorb and scatter different frequencies of light differently. </p>
 
-“The flux mean opacity relates the bolometric radiation flux to the radiative acceleration.” Bolometric refers to measurements or quantities that account for radiation over all wavelengths, not just a limited portion of the electromagnetic spectrum. In the context of stars, the bolometric radiation flux represents the total energy emitted per unit area across all wavelengths. Radiative acceleration refers to the acceleration imparted to matter by radiation pressure. Light exerts pressure when it interacts with matter, such as gasses and dust. This pressure can cause matter to accelerate. Radiative acceleration is significant in various processes, such as driving stellar winds, influencing dynamics of accretion disks around compact objects, and affecting the structure and evolution of stars. 
+<p>The Rosseland mean opacity is a weighted frequency-average of the opacity of a medium. Weight is ascribed proportionally to the sensitivity of the black-body spectrum to temperature change because these are the frequencies that are most efficient in transporting energy down thermal gradients. The Rosseland mean opacity is a useful tool in the hands of astronomers for it enables a simplified treatment of radiative transfer.</p>
 
-$$\kappa_F = \int_0^\infty d\nu \kappa_\nu F_\nu / F$$
+<h3>Flux Mean Opacity</h3>
 
-Relativistic Kinetic Equation for Compton Scattering
+\[
+\begin{equation}\label{eq:FMO}
+\kappa_F = \int_0^\infty d\nu \kappa_\nu F_\nu / F
+\end{equation}
+\]
 
-The relativistic kinetic equation we are about to do battle with is a veritable foe, but this is worthwhile because it will prove to be a generative wellspring of insight. (???)
+<blockquote>
+  The flux mean opacity relates the bolometric radiation flux to the radiative acceleration.
+</blockquote> 
+<footer>Juri Poutanen, <cite>Rosseland and Flux Mean Opacities for Compton Scattering</cite></footer>
 
-First off, what is Compton scattering and how should we think about it? Compton scattering is an innately quantum phenomenon, so classical EM waves won’t help us here. A photon—a quanta of the EM field—has some probability of scattering off of an electron. We like to think about photons as being located in some particular place rather than being in a superposition of being in many places at once, and, thankfully, this “billiard ball” imagery is applicable here if we are willing to take a few QED-derived formulae on good faith. 
+<p>Here, "bolometric" refers to measurements or quantities that account for radiation over all wavelengths, not just a limited portion of the electromagnetic spectrum. In the context of stars, the bolometric radiation flux represents the total energy emitted per unit area across all wavelengths. Radiative acceleration refers to the acceleration imparted to matter by radiation pressure. </p>
 
-Starting from the relativistic kinetic equation for Compton scattering, which accounts for induced scattering and fermion degeneracy, we arrive at a Radiation Transfer Equation (RTE). We will gloss over the derivation but pick apart the resulting RTE as it is the wellspring from which all knowledge flows. 
+<p>Light exerts pressure when it interacts with matter, such as gasses and dust. This pressure can cause matter to accelerate. Radiative acceleration drives stellar winds, it influences the dynamics of accretion disks around compact objects, and it affects the structure and evolution of stars. </p>
 
-Image re-aranged
-$$
-\hat \omega \cdot \nabla_\tau n(\bf x) 
-= 
--n(\bf x){1\over x} \int_0^\infty x_1dx_1 \int d^2\hat\omega_1 R(x_1,x,\mu)
-{1\over x} \int_0^\infty x_1dx_1 \int d^2\hat\omega_1 R(x,x_1,\mu)
-{n(\bf x) \over x} \int_0^\infty x_1dx_1 \int d^2\hat\omega_1 n(\bf x_1) [R(x_1,x,\mu) - R(x,x_1,\mu)]
-$$
+<h2>Compton Scattering and the RTE</h2>
 
+<p>Equation \eqref{eq:RTE0} shows the Radiation Transfer Equation (RTE) that we know and love. </p>
 
-This expression may look alien, but it is in fact a familiar friend couched (disguised) in the trappings (another word) of foreign notation. First we see that there are only four terms, one on the left hand side (LHS) and three on the right hand side (RHS). 
+\[
+\begin{equation}\label{eq:RTE0}
+{d I_\nu \over d s} = -\sigma_nu I_\nu + \int_{4\pi} \sigma_nu(\Omega’ \to \Omega)I_\nu(\Omega’)d\Omega’
+\end{equation}
+\]
 
-$${d I_\nu \over d s} = -\sigma_nu I_n + \int_{4\pi} \sigma_nu(\Omega’ -> \Omega)I_\nu(\Omega’)d\Omega’$$
-
-LHS: $\hat \omega$ is the direction of propagation, $\bf x$ is the four momentum of the incident photons and it therefore encodes frequency as well as direction, $n(\bf x)$ is the number density. Since $I_\x \propto n_\x \x$, we see that the left hand side is related to ${d I_\nu \over d s}$ by a factor of the frequency $x$ (footnote: and a few fundamental constants which are of little help to our understanding this equation here)—the author chose to put it’s reciprocal on the left-hand side instead. 
-
-RHS: $\bf x_1$ is the four-momentum of the photon after scattering, $\mu$ is the cosine of the scattering angle, and $R(x,x_1,\mu)$ is the redistribution function which quantifies the rate at which a photon with energy x will scatter into a photon with energy x_1 and at scattering angle is $\mu$; we will examine in greater detail in the next section. As intimidating as they look, there are only two terms, like the LHS, they are also familiar. The first is negative, and it’s proportional to $n(x)$, just like $-\sigma_\nu I_\nu$. The second is positive, and looks alot like the in-scattering term $\int \sigma_\nu (\Omega’ \to \Ometa )d\Omega’$. The last term is a bit more awkward and it may have to do with photon-photon interactions; suffice it to say that if $n(\bf x)<<1$, the term is negligible and when we are in regimes where the redistribution is roughly symmetric in it’s first two arguments $R(x,x_1,\mu)\approx R(x_1,x,\mu)$, it is also negligible. 
-
-The Redistribution Function
-
-The redistribution function encapsulates all of the microscopic quantum electrodynamics that we don’t want to get bogged down in. It also depends on the distribution of scattering agents (i.e. electrons)(\footnote at this stage in the paper they also account for positrons, but eventually ignore positrons pair-production later on). 
-
-For the electrons, we take the Fermi-Dirac distribution (isotropic), since we are interested in both degenerate and non-degenerate regimes. (This implies, of course, that we are in local thermal equilibrium (LTE).)
-
-[Animation of energy profile of Fermi-Dirac (also plot MB and BE dists) distribution with Temperature slider; this is n(x)]
-
-Another ingredient that enters the dynamics of these interactions is the Klein-Nishina reaction rate F (not to be confused with flux). We will not delve into the deep insights of Klein & Nishina concerning the origin of F (because I don’t understand them), but content ourselves to observe that the Klein-Nishina cross section factors into our equations via the reaction rate. 
-
-[KN reaction rate anim]
-
-To get at a manageable expression for the distribution of photons, we expand around the black-body distribution. This is justified because in the thermonuclear burning regions we are concerned with, the radiation field is nearly isotropic.
+<p>Compton scattering is a photon-electron inelastic collision. It's "inelastic" because energy is echanged between photons and the electrons, this only happens when the electrons are hot. Compton scattering is an innately quantum phenomenon, so classical EM waves won’t help us here. A photon—a quanta of the EM field—has some probability of scattering off of an electron. We like to think about photons as being located in some particular place rather than in a superposition of many places at once, and, thankfully, this “billiard ball” imagery is applicable here if we are willing to take a few QED-derived formulae on good faith. </p>
 
 
+<p>Starting from the relativistic kinetic equation for Compton scattering, which accounts for induced scattering and fermion degeneracy, Poutanen guids us to the RTE. We will gloss over the derivation but pick apart the resulting RTE as it is the wellspring from which all knowledge flows. </p>
 
-Now we need to find the mean free paths. Remember that to find the Rosseland and Flux mean opacities—our ultimate goal—we need to find the frequency dependent opacity as well as the frequency dependent flux; which we can easily compute once we know $n(\bf x)$ and $l_x$. Thankfully, a linear integral equation for the mean-free path—which can be solved numerically by iteration!—pops right out of the above equation. 
+\[
+\begin{align*}
+\hat \omega \cdot \nabla_\tau n(\mathbf x)
+= &-n(\mathbf{x}){1\over x} \int_0^\infty x_1dx_1 \int d^2\hat\omega_1 R(x_1,x,\mu)\\
+&+{1\over x} \int_0^\infty x_1dx_1 \int d^2\hat\omega_1 R(x,x_1,\mu)\\
+&-n(\mathbf x){1 \over x} \int_0^\infty x_1dx_1 \int d^2\hat\omega_1 n(\mathbf x_1) [R(x_1,x,\mu) - R(x,x_1,\mu)]
+\end{align*}
+\]
 
-Results
+<p>
+The above expression may look alien but rest assured, it is a familiar foe—Equation \eqref{eq:RTE0}—couched in the trappings of foreign notation. First we see that there are only four terms, one on the left hand side (LHS) and three on the right hand side (RHS). </p>
 
-Here’s the punchline: we can pop this expression for $l_x$ and $n(x)$ into the equations for the Rosseland and Flux mean opacities and voila—the expressions are exact. Sure, we’ve made a few approximations, but all of them hold water in regimes of interest (isotropic, hot, dense, and optically thick media dominated by Compton scattering). Notably, electron degeneracy and relativistic effects have been accounted for. 
+<p>LHS: \(\hat \omega\) is the direction of propagation, \(\mathbf x\) is the four momentum of the incident photons and it therefore encodes frequency as well as direction, \(n(\mathbf x)\) is the photon number density. Since \(I_x \propto n_x x\), we see that the left hand side is related to \({d I_\nu \over d s}\) by a factor of the frequency \(x \equiv \nu\)—the author chose to put it’s reciprocal on the left-hand side instead. </p>
 
-Now Poutanen reaps the reward of his labor by using his result to do a review of previously used approximate results. 
+<p>
+RHS: \(\mathbf x_1\) is the four-momentum of the scattered photon, \(\mu\) is the cosine of the scattering angle, and \(R(x,x_1,\mu)\) is the redistribution function which quantifies the rate at which a photon with energy $x$ will scatter into a photon with energy $x_1$, at scattering angle is \(\mu\). As intimidating as they look, there are only three terms, and, two of them are also familiar. The first is negative, and it’s proportional to \(n(\mathbf x)\), just like \(-\sigma_\nu I_\nu\). The second is positive, and looks alot like the in-scattering term \(\int \sigma_\nu (\Omega’ \to \Omega )d\Omega’\). The final term is a bit awkward and it may have to do with photon-photon interactions (don't ask me); suffice it to say that if \(n(\mathbf x)<<1\), the term is negligible and when we are in regimes where the redistribution is roughly symmetric in it’s first two arguments \(R(x,x_1,\mu)\approx R(x_1,x,\mu)\), it is also negligible. </p>
 
-My Take
+<p>
+Now all we have to do is figure out what the redistribution function is and then we know the full RTE (in other words EVERYTHING). 
+</p>
 
-What struck me most about this paper is the marriage of analytical and computational sophistication in Poutanen’s result. It appears to be the final word on the computation of both the Rosseland mean opacity and the flux mean opacity in these high-energy regimes. Poutanen is able to make his findings legible to a wide audience. This paper is important for three reasons: 
-(1) Puts more certainty and sets previously unknown error bars on historic results. 
-(2) It enables the computation of the Rosseland mean and flux mean opacities in previously unknown regions of parameter space: high-temperature and high-degeneracy. Furthermore, the paper does a thorough job of analyzing how previously used approximations break down in these regimes. Note that regions with high-degeneracy factors are typically hot dense, as far as astronomers are concerned, which justifies the use of the diffusion approximation. 
-(3) Because it lays the groundwork for calculations involving more complicated scattering-agent distribution functions. 
+<h2>The Redistribution Function</h2>
 
+<footer>I'm weary of losing you by writing too many equations, this section is words only.</footer>
 
-  <h2>References</h2>
-    Yoel Refaeli, "Comptonization of the Cosmic Microwave Background: The Sunyaev-Zeldovich Effect" (1995) </br></br>
-    Mark Birkenshaw, "" () </br></br>
+<p>The all important redistribution function (RF) encapsulates the microscopic physics of photon-electron interactions. The electron distribution also factors into the integrand of RF (which can be expressed as an integral, see equaiton 11 in the paper). </p>
+
+<p>For the electrons, we take the Fermi-Dirac distribution (isotropic), since we are interested in the degenerate regime. Using this isotropic distribution implies that we are in an isotropic and locally thermalized (LTE) medium. </p>
+
+<p>Another ingredient that enters the dynamics of these interactions is the Klein-Nishina reaction rate, which is related to the Klein-Nishina cross section. The reaction rate (and the cross section) is dependent on the four-momenta of the incoming and scattered photon. This aditional element of complication is required to deal with relativistic electrons. (And the electrons that inhabit the nuclear furnaces of X-ray-bursting neutron stars are very much relativistic.) </p>
+
+<p>To get at a manageable expression for the distribution of photons, we expand around the black-body distribution to first order. This is justified because in the thermonuclear burning regions we are concerned with, the radiation field is nearly isotropic. The non-black-body term depends on the (frequency dependent) mean-free path $l_x$.</p>
+
+<p>Remember that to find the Rosseland and Flux mean opacities—our ultimate goal—we need to integrate over the frequency dependent opacity as well as the frequency dependent flux; both of which we can compute once we know $n(\mathbf x)$ and $l_x$. Thankfully, a linear integral equation for the mean-free path—which can be solved numerically, by iteration, as we did on the first problem set—pops right out of the RTE after we substitute in the photon distribution black-body expanded expression. </p>
+
+<h2>Results</h2>
+
+<p>Here's the punchline: Equation \eqref{eq:punchline}</p>
+
+\[
+\begin{equation}\label{eq:punchline}
+\kappa_R \propto {\int_0^\infty {\partial B_x \over \partial \Theta} dx \over \int_0^\infty l_x {\partial B_x \over \partial \Theta} dx}
+\end{equation}
+\]
+
+<p>We're done! A similar expression can be found for the Flux mean opacity. Sure, we’ve made a few approximations, but all of them hold water in the regimes of interest to Juri Poutanen (isotropic, hot, dense, and optically thick media dominated by Compton scattering). Notably, electron degeneracy and relativistic effects have been accounted for. </p>
+
+<p>We are now poised to reap the rewards of Juri Poutanen's labour by using this result by reviewing the litterature on previousy known approximations. Luckily, Poutanen did that for us too! </p>
+
+<div>
+  <img
+    src="./assets/rosseland_mean_comparison.png";
+    width="100%"
+  />
+  <figcaption>Rosseland mean opacity (in units of $\sigma_TN_e/\rho$) as a function of dimensionless temperature for various values of the degeneracy parameter $\eta$. Solid black curves are exact calculations (the flux mean opacity is equal to the Rosseland mean to within $10^{-4}$). The top curve corresponds to $\eta=-10$; for the following curves $\eta$ varies from $-1$ to $7$. (a) The black squares and blue dots are numerical results from previous papers, and the red dotted line and green-dashed line are approximations used in the litterature. (b) The dotted and dashed curves are values computed from approximations derived in the paper.</figcaption>
+</div>
+
+<br/>
+
+<h2>Conclusion / My Take</h2>
+
+<p>What struck me about this paper is the marriage of analytical and computational sophistication in Poutanen’s result. It appears to be the final word on the computation of both the Rosseland mean opacity and the flux mean opacity in these high-energy regimes. I'm impressed by Poutanen's ability to make his findings legible to a wide audience and to package them into a coherent 8-page bombshell of a paper. </p>
+
+<p>The qualification I put in the title is obviously a bit of a joke at the expense of Juri Poutanen, but it's not a very cutting one because the result is much more general and generalizable than that joke would have you believe. Half of those qualifiers are sound assumptions in many astrophysical contexts (LTE, Optically Thick, Hot), and the result also holds in the non-degenerate case. Furthermore, something I glossed over in this review was that absorbption <i>was</i> accounted for! Finally, the assumption that the scattering agents are isotropically distributed is good because (a) it simplifies the reader's job, and (b) this paper lays the ground-work for computing non-isotropic distributions too: just figure out how to incorporate that into the redistribution function and you're done! </p>
+
+<p>
+This paper was published in Feburary 2017 and has accrued 40 citations as of Feburary 2024. I sampled 15 of those citations and they were split about 50/50 between papers on stellar evolution and papers on neutron stars. Nevertheless, it's hard to evaluate the importance of this paper without being familiar with the field. (I didn't trouble myself to read those papers to find out how critical Poutanen's work was to them.)</p>
+
+<p>It definitely seems like a useful piece of work; Poutanen found errors in one of the approximations used in the litterature and he was able to show us explicitly in what temperature and degeneracy regimes other approximations become invalid. I doubt it voids any past work but it does empower us to discern the accuracy of past results that made use of dubious approximations. Moreover, it paves the way for more precise simulations of X-ray bursts and solar interiors and it gives us more confidance in future simulation results. Perhaps a future paper will do the same derivation but with an anisotropic electron distribution to model strong magnetic fields. </p>
+
+<p>Unfortunately I couldn't find Juri Poutanen on GitHub and was unable to scrutinize his code; though I have messaged him about this.</p>
+
+<h2>TL;DR</h2>
+
+<p>This paper is important for reasons: 
+<ul>
+  <li>Sets previously unknown systematic errors on historic results. </li>
+  <li>Enables calculation of energy-transport in previously unknown regions of parameter space.</li>
+  <li>Methods lay groundwork for calculations involving more complicated scattering-agent distribution functions.</li>
+</ul>
+</p>
 
 
     </br></br></br></br></br></br>

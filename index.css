@@ -133,6 +133,13 @@ div.column-left p {
   margin: 0
 }
 
+p.block {
+  border: 5px solid #555;
+  padding: .5em;
+  display: block;
+  font-family: "Courier", monospace;/* "American", "Typewriter", serif;*/
+}
+
 /* Desktop specific */
 @media only screen and (min-width: 768px) {
   img.profile {

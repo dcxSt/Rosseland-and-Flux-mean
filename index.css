@@ -76,6 +76,16 @@ img.profile {
   max-width: 35ch;
 }
 
+.cursive {
+  font-family: "Apple", "Chancery", cursive;
+  font-size: 18px;
+}
+
+.peasant {
+  font-family: "Chalkduster", fantasy;
+  font-size: 10px;
+}
+
 #recent-gallery figcaption {
   margin-bottom: 1rem;
 }

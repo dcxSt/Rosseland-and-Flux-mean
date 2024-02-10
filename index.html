@@ -84,11 +84,13 @@
 
 <h2>Introduction </h2>
 
-<p>Radiative transport is one of two pillars of astrophysical heat transport that underpin our knowledge of <i>many</i> (all?) astrophysical processes. The Rosseland and Flux mean opacities provide a way to compress a whole spectrum's worth of energy-transfer information into a single number, as such they are essential and ubiquitous tools in the arsenal of astrophysicists. </p>
+<p>Radiative transport is one of two pillars of astrophysical heat transport that underpin our knowledge of <i>many</i> (all?) astrophysical processes. The Rosseland and Flux mean opacities provide a way to compress a whole spectrum's worth of energy-transfer information into a single number, as such they are essential tools in the arsenal of astrophysicists and they are ubiquitous in the litterature. </p>
 
-<p>In his paper, Juri Poutanen derives an exact expression for the Rosseland and Flux mean opacities from basic physics; this being the case, we have no choice but to get down and dirty with some equations. However, we will not be as assiduous in our book-keeping as Poutanen is in the paper, opting instead to select a few key equations and pick them appart for physical intuition. (If you want to see the derivations in all their glory you can read the paper. If that doesn't quench your appetite there's an 83 page monograph on the minutae of Compton Scattering penned by the same hand.) </p>
+<p>In his paper, Juri Poutanen derives an exact expression for the Rosseland and Flux mean opacities from basic physics; this being the case, we have no choice but to get down and dirty with some equations. However, we will not be as assiduous in our book-keeping as Poutanen is in the paper, opting instead to select a few key equations and pick them appart for physical intuition. <span class="peasant">(If you want to follow the derivations in all their glory you can read the paper. If that doesn't quench your appetite there's an 83 page monograph on the minutae of Compton Scattering penned by the same hand.)</span> </p>
 
 <h3>Rosseland Mean Opacity</h3>
+
+The Rosseland Mean Opacity is defined by Equation \eqref{eq:RMO}.
 
 \[
 \begin{equation}\label{eq:RMO}
@@ -98,9 +100,9 @@
 
 <p>Radiation transfer is what astrophysicists call “how light propagates in different media”. Media are “backgrounds” through which light travels: e.g. a gas of ionized hydrogen at 3000 Kelvin, is one example of a medium astrophysicists may be interested in—or, less abstractly, the inside of the sun is another. </p>
 
-<p>One of the important parameters in determining the dynamics of radiation transfer through a medium is its opacity. The opacity quantifies the rate of scattering (photons bouncing off of things) and absorption (photons being gobbled up by things). The opacity of a medium is frequency dependent, i.e. media typically absorb and scatter different frequencies of light differently. </p>
+<p>One of the important parameters in determining the dynamics of radiation transfer through a medium is its opacity. The opacity quantifies the rate of scattering <span class="peasant">(photons bouncing off of things)</span> and absorption <span class="peasant">(photons being gobbled up by things)</span>. The opacity of a medium is frequency dependent, i.e. media typically absorb and scatter different frequencies of light differently. </p>
 
-<p>The Rosseland mean opacity is a weighted frequency-average of the opacity of a medium. Weight is ascribed proportionally to $\partial B_\nu / \partial T$—the temperature derivative of the black-body, because this quantity measures how efficient that frequency is at transporting energy down thermal gradients. The Rosseland mean opacity is a useful tool in the hands of astronomers because it enables a simplified treatment of radiative transfer.</p>
+<p>The Rosseland mean opacity is a weighted frequency-average of the opacity of a medium. Weight is ascribed proportionally to $\partial B_\nu / \partial T$—the temperature-derivative of the black-body—because this quantity measures how efficient that frequency is at transporting energy down thermal gradients. The Rosseland mean opacity is a useful tool in the hands of astronomers because it enables a simplified treatment of radiative transfer.</p>
 
 <h3>Flux Mean Opacity</h3>
 
@@ -134,7 +136,7 @@
 <p class="block"><b>Compton Scattering Analogy:</b> A photon—a quanta of the EM field—has some probability of scattering off of an electron. We like to think about photons as being located in some particular place rather than in a superposition of many places at once. Thankfully, this “billiard ball” imagery is applicable if we are willing to take a few QED-derived (Quantum Electro Dynamics) formulae on good faith. </p>
 
 
-<p>Starting from the <span class="cursive">Relativistic Kinetic Equation for Compton scattering</span> <span class="peasant">(a dumb equation which describes the macroscopic, statistical behaviour of populations of photons and electrons in terms of their microscopic properties)</span>, Poutanen guids us to the RTE. We will gloss over the derivation but pick apart the resulting RTE, for it is the wellspring from which all knowledge floweth. </p>
+<p>Starting from the <span class="cursive">Relativistic Kinetic Equation for Compton scattering</span> <span class="peasant">(a dumb equation which describes the macroscopic, statistical behaviour of populations of photons and electrons in terms of their microscopic, fundamental properties)</span>, Poutanen guids us to the RTE. We will gloss over the derivation but pick apart the resulting RTE, for it is the wellspring from which all knowledge floweth. </p>
 
 \[
 \begin{align*}
@@ -154,20 +156,22 @@ The above expression may look alien but rest assured, it is merely a familiar fa
 <b>RHS:</b> \(\mathbf x_1\) is the four-momentum of the scattered photon, \(\mu\) is the cosine of the scattering angle, and \(R(x,x_1,\mu)\) is the redistribution function which quantifies the rate at which a photon with energy $x$ will scatter into a photon with energy $x_1$, at scattering angle \(\mu\). As intimidating as they look, there are only three terms, and, two of them are familiar. The first is negative, and it’s proportional to \(n(\mathbf x)\), just like \(-\sigma_\nu I_\nu\). The second is positive, and looks alot like the in-scattering term \(\int \sigma_\nu (\Omega’ \to \Omega )d\Omega’\). The final term is a bit awkward and it may have to do with photon-photon interactions (don't ask me); suffice it to say, that if \(n(\mathbf x)<<1\), the term is negligible and when we are in regimes where the redistribution is roughly symmetric in it’s first two arguments \(R(x,x_1,\mu)\approx R(x_1,x,\mu)\), it is also negligible. </p>
 
 <p>
-Now all we have to do is figure out what the redistribution function is and then we know the full RTE <span class="peasant">(in other words EVERYTHING)<span class="peasant">. 
+Hopefully this equation looks less daunting now than it did at first. </p>
+
+<p>And the question that is at the tip of your lips is: <i>"What is the redistribution function?"</i> 
 </p>
 
 <h2>The Redistribution Function</h2>
 
 <!--<footer>I'm weary of losing you by writing too many equations, this section is words only.</footer>-->
 
-<p>The all important redistribution function (RF) encapsulates the microscopic physics of photon-electron interactions. The electron distribution also factors into the integrand of RF (which can be expressed as an integral, see equaiton 11 in the paper). </p>
+<p>The redistribution function (RF) encapsulates the microscopic physics of photon-electron interactions into a digestable form factor. The electron distribution, <span class="cursive">Quantum Field Theorey</span> and <span class="cursive">Quantum Electrodynamics</span> are all packed up into this function so that we don't have to worry about them too much. Lets take a peak at some constituants of this function, and then lets see what it can give us in return. (If you're curious, see equation 11 in the paper.) </p>
 
 <p>For the electrons, we take the Fermi-Dirac distribution, since we are interested in the degenerate regime. Using this isotropic distribution implies that we are in an isotropic and locally thermalized (LTE) medium <span class="peasant">(i.e. no big magnetic fields)</span>.</p>
 
-<p>Another ingredient that enters the dynamics of these interactions is the <b>Klein-Nishina reaction rate</b>, which is related to the Klein-Nishina cross section. The reaction rate (and the cross section) is dependent on the four-momenta of the incoming and scattered photon. This aditional element of complication is required to deal with relativistic electrons. (And the electrons that inhabit the nuclear furnaces of X-ray-bursting neutron stars are very much relativistic.) </p>
+<p>Another ingredient that enters into the dynamics of these interactions is the <b>Klein-Nishina reaction rate</b>, which is related to the Klein-Nishina cross section. The reaction rate (and the cross section) is dependent on the four-momenta of the incoming and scattered photon. This aditional element of complication is required to deal with relativistic electrons. (And the electrons that inhabit the nuclear furnaces of X-ray-bursting neutron stars are very much relativistic.) </p>
 
-<p class="block"><b>Cross Section Analogy:</b> Imagine the electrons are billiard balls and photons are like ping-pong balls, and they're all bouncing around the place. The cross-section of a particle is kindof like the $\pi r^2$, where $r$ is the ball's radius. The greater the cross section, the likelier two passing balls will hit each other. Unfortunately, the Klein-Nishina cross section is dependent on speed and direction of incident. This means that the billiard balls' sizes appear larger to ping-pong balls (photons) that it is speeding towards that ping pong balls that it's travelling perpendicularly to. This is quite unintuitive to picture. That's special relativity.</p>
+<p class="block"><b>Cross Section Analogy:</b> Imagine the electrons are billiard balls and photons are like ping-pong balls, and they're all bouncing around the place. The cross-section of a particle is kindof like the $\pi r^2$, where $r$ is the ball's radius. The greater the cross section, the likelier two passing balls will hit each other. Unfortunately, the Klein-Nishina cross section is dependent on speed and direction of incident. This means that a billiard ball's size appears larger to ping-pong balls (photons) that it is speeding towards than to ping-pong balls that it's travelling perpendicularly to. This is quite unintuitive to picture. That's special relativity.</p>
 
 <p>To get at a manageable expression for the distribution of photons, we expand around the black-body distribution to first order. This is justified because in the thermonuclear burning regions we are concerned with, the radiation field is nearly isotropic. The non-black-body term depends on the (frequency dependent) mean-free path $l_x$.</p>
 
@@ -185,7 +189,7 @@ Now all we have to do is figure out what the redistribution function is and then
 
 <p>We're done! That's the Rosseland Mean opacity written in terms of the mean-free-path! A similar expression can be found for the Flux mean opacity. Sure, we’ve made a few approximations, but all of them hold water in the regimes of interest to Juri Poutanen. Notably, electron degeneracy and relativistic effects have been accounted for. </p>
 
-<p>We are now poised to reap the rewards of Juri Poutanen's labour by using this result to review the litterature. Luckily, Poutanen did that for us too! </p>
+<p>We are now poised to reap the rewards of Poutanen's labour by using this result to review the litterature. Luckily he did that for us too! </p>
 
 <div>
   <img
